@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Copy the encrypted message or open the text encryption and decryption tool.">
+  <title>Encrypted Message</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 1.25rem; background: #f3f6fb; color: #172033; }
+    main { width: min(100%, 760px); box-sizing: border-box; padding: clamp(1.25rem, 4vw, 2rem); background: white; border: 1px solid #dce3ee; border-radius: 16px; box-shadow: 0 12px 32px #17203312; }
+    h1 { margin-top: 0; }
+    p { line-height: 1.55; }
+    textarea { box-sizing: border-box; width: 100%; min-height: 12rem; resize: vertical; padding: 1rem; border: 1px solid #c8d2e1; border-radius: 10px; font: 0.9rem/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+    button, .link { display: inline-block; margin-top: 1rem; padding: 0.7rem 1rem; border: 0; border-radius: 8px; background: #1457c5; color: white; font: inherit; text-decoration: none; cursor: pointer; }
+    .link { margin-left: 0.5rem; background: #e8eef8; color: #17345f; }
+    #status { min-height: 1.5em; }
+    @media (max-width: 480px) { .link { margin-left: 0; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Encrypted message</h1>
+    <p>Copy the text below. You may need the original encryption method or password to decrypt it.</p>
+    <label for="ciphertext">Encrypted text</label>
+    <textarea id="ciphertext" readonly spellcheck="false">rwmz1KwGkkrC6BAOdceCwm26Rzgn4TBq4Sr1BBvLaGhCXTdqD1lsUNiAxdMt9kN3A94i0FjaiZ2ZWg1vesiMLVUnUCUhDsXTaNFbtq6F9ULDskVTLNVQt9IrreVLK0b22VG33/xvUYrZPhhZWZ3S7WGUfkpZVCfbNbpYOXplNPY8AN7l1x570Sk+xhyRQlFoyKXvKX1dMGtApqw5XkWK9+uC0fCD+YDUkYOGjfhXYOoS08t4jHIxily2xlD+eehUMT9r1vqOFOb+qlklbwugcKAAiYjDl2KR4iuFOKZoLdwp8UD+e92L6qEyAOzv9LW+wGagfbayawqepb4s5t0Pr9jxSNxjom28Y+jHzmkBOlD8wnscZGb9dcaRDGxFwBLIDhZV9j1HYHWaXQAQoqAT1X0Cjd5qEQWXQnL5HEb7G1jhrseI4AMIBekuhKGW/B7vjQijfyTtrSJpyMUvqcOrdwGuEvhDvAVNYPfE6Mg5f1mycALFAvbEgqwg5YQhkK4um39aqYOGh21gBEN87XnTubOX2uUamANS0K0fYLKN+kvlXxLwnu5WqdyjZvBkcCkqed71e6HtgzxfHj3Pp5UgQXsjMW8rgaNapVBA4dYh0UZsIVCeN0z+m2mxLkKihsYXs938ZBoaXsigoYau5xjJ3sW5pY+55tSohSzdvcTEvrO+iiWHCT068k7uyFjpVz3GZaRUhPzQ+dPW62RVM5Bd4+JJNJRR0qDnAKD0zU1zskw=</textarea>
+    <div>
+      <button id="copy" type="button">Copy encrypted text</button>
+      <a class="link" href="https://www.devglan.com/online-tools/text-encryption-decryption" target="_blank" rel="noopener noreferrer">Open encryption/decryption tool</a>
+    </div>
+    <p id="status" role="status" aria-live="polite"></p>
+  </main>
+  <script>
+    const text = document.getElementById('ciphertext');
+    const status = document.getElementById('status');
+    document.getElementById('copy').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(text.value);
+        status.textContent = 'Encrypted text copied.';
+      } catch {
+        text.focus();
+        text.select();
+        status.textContent = 'Clipboard access was unavailable. The text is selected; copy it manually.';
+      }
+    });
+  </script>
+</body>
+</html>
